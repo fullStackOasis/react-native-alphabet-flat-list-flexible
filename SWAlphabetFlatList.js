@@ -142,7 +142,7 @@ export class SWAlphabetFlatList extends Component {
 			data={this.props.data}
 			handleSectionHeaderLayout={this.handleSectionHeaderLayout}
 			renderItem={this.props.renderItem}
-			//handleChildLayout={this.handleChildLayout}
+			handleChildLayout={this.handleChildLayout}
 		/>);
 	};
 
@@ -157,8 +157,12 @@ export class SWAlphabetFlatList extends Component {
 			initialNumToRender : 0
 		}
 	}
-
 	
+	/**
+	 * Example of what input data may look like:
+	 * {"id":"C","width":411.4285583496094,"height":204.57142639160156,"x":0,"y":274.8571472167969}
+	 * @param {data} Object with an id property that is a letter, like "C", a height, width, x, and y value
+	 */
 	handleChildLayout = (data) => {
 		// Input data like {"width":411.4285583496094,"height":225.14285278320312,"x":0,"y":225.14285278320312}
 		var obj = {};
@@ -166,19 +170,19 @@ export class SWAlphabetFlatList extends Component {
 		var newKey = "" + data.id;
 		this.setState(prevState => {
 			let z = { ...prevState.dataSourceCoordinates };
-			console.warn("SW Hello prevState ZZZ! " + JSON.stringify(z));
+			//console.warn("SW Hello prevState ZZZ! " + JSON.stringify(z));
 			z[newKey] = data;
-			console.warn("SW Hello new z! " + JSON.stringify(z));
+			//console.warn("SW Hello new z! " + JSON.stringify(z));
 			return {dataSourceCoordinates : z};
 		});
-		console.warn("*** SW Hello handleChildLayout App handles data from child: obj " + JSON.stringify(obj));
-		this.setState(obj);
-		console.warn("*** SW Hello handleChildLayout App handles data from child: this.state " + JSON.stringify(this.state.newKey));
-		console.warn("SW Hello! handleChildLayout looks for renderEach " + (typeof this.renderEach));
+		//console.warn("*** SW Hello handleChildLayout App handles data from child: obj " + JSON.stringify(obj));
+		//this.setState(obj);
+		//console.warn("*** SW Hello handleChildLayout App handles data from child: this.state " + JSON.stringify(this.state.newKey));
+		//console.warn("SW Hello! handleChildLayout looks for renderEach " + (typeof this.renderEach));
 	}
 
   render() {
-	  console.warn("SWAlphabetFlatList.render: this.state.titles " + JSON.stringify(this.state.titles));
+	  //console.warn("SWAlphabetFlatList.render: this.state.titles " + JSON.stringify(this.state.titles));
     return (
       <View
         style={{
