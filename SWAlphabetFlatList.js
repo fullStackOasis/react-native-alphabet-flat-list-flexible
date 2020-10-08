@@ -222,35 +222,37 @@ export class SWAlphabetFlatList extends Component {
 class KeyedView extends React.Component {
 	constructor(props) {
 		super(props);
-		console.warn("SW KeyedView constructor Hello this.props.item: " + JSON.stringify(this.props.item));
+		// this.props.item is expected to be a letter, like "T"
 	}
-	onLayout = (e) => {
-		console.warn("Hello! KeyedView.onLayout XXXXXX?? " + JSON.stringify(e.nativeEvent.layout.y) + ", " + 
-			JSON.stringify(e.nativeEvent.layout.y) + " sectionId? " + this.props.item);
+	/**
+	 * The onLayout method here is used to propagate properties, in particular y,
+	 * to the container/parent, so scrolling to the section header can be done
+	 * correctly.
+	 */
+	handleOnLayout = (e) => {
 		let obj = {
 			id: this.props.item, // e.g. "T"
 			width: e.nativeEvent.layout.width,
 			height: e.nativeEvent.layout.height,
 			x: e.nativeEvent.layout.x,
-			y: e.nativeEvent.layout.y // layout position of this SectionHeader?
+			y: e.nativeEvent.layout.y // layout position of this SectionHeader. Hopefully! e.g. 160.57142639160156,
 		}
 		this.props.handleChildLayout(obj);
 	}
 
 	render () { 
+		// TODO FIXME height is artificially set to 25.
 		let h = 25;
 		let item = this.props.item;
-		let sectionId = item;
+		let sectionId = item; // e.g. "T"
 		// item is NOT {"item":{"name":"Alex Tabarrok","id":20},"index":0,"sectionId":"T","last":false}
 		// item is "T" for example
 		// data is {"A":[{"name":"Edith Abbott","id":1},
 		//			{"name":"Kenneth Arrow","id":2}],
 		//          "B":[{"name":"Robert Barro","id":3},...
-		console.warn("Hello SW. KeyedView item : " + JSON.stringify(item));
-		console.warn("Hello SW. KeyedView sectionId : " + JSON.stringify(sectionId));
-		console.warn("Hello SW. KeyedView data : " + JSON.stringify(this.props.data));
-		this.props.data[sectionId].map((itemValue, itemIndex, items) => console.warn(JSON.stringify(itemValue) + ", " + itemIndex + ", item " + item));
-		return (<View key={item} onLayout={this.onLayout}>
+		// Useful for debugging:
+		// this.props.data[sectionId].map((itemValue, itemIndex, items) => console.warn(JSON.stringify(itemValue) + ", " + itemIndex + ", item " + item));
+		return (<View key={item} onLayout={this.handleOnLayout}>
 		<SectionHeader key={item} height={h} h={h} title={item} handleSectionHeaderLayout={this.props.handleSectionHeaderLayout}/>
 		{this.props.data[sectionId].map((itemValue, itemIndex, items) =>
 			this.props.renderItem({
