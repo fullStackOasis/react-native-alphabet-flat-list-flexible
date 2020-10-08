@@ -1,0 +1,19 @@
+{
+  "name": "react-native-alphabet-flat-list-flexible",
+  "version": "1.0.0",
+  "description": "like react-native-alphabet-flat-list but works with different item sizes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible.git"
+  },
+  "author": "fullStackOasis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible/issues"
+  },
+  "homepage": "https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible#readme"
+}
