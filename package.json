@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible/issues"
   },
-  "homepage": "https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible#readme"
+  "homepage": "https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible#readme",
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-native": "^0.63.3",
+    "react-native-root-toast": "^3.2.1"
+  }
 }
