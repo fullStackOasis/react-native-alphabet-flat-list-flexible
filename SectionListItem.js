@@ -1,9 +1,5 @@
 /**
- * Created by JetBrains WebStorm.
- * Author: yoon
- * Date: 19-1-8
- * Time: 下午4:55
- * Desc: 滚动列表字母项
+ * Nothing to say.
  */
 import React from 'react';
 import PropTypes from 'prop-types';
