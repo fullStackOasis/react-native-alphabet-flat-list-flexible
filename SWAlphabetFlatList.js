@@ -87,30 +87,27 @@ export class SWAlphabetFlatList extends Component {
   /**
    * Tap the letter to trigger scroll
    */
-  onSelect = index => {
-		console.warn("onSelect, index is " + index);
-		console.warn("onSelect, dataSourceCoordinates " + JSON.stringify(this.state.dataSourceCoordinates));
-    if (this.state.titles[index]) {
+	onSelect = index => {
+		if (this.state.titles[index]) {
 			let title = this.state.titles[index]; // e.g. "T"
-      // const { length, offset } = this.getItemLayout(index);
-			//this.list.scrollTo({ x: 0, y: offset, animated: false });
+			// No longer doing this; it assumed fixed height on each item
+			// const { length, offset } = this.getItemLayout(index);
+			// this.list.scrollTo({ x: 0, y: offset, animated: false });
 			let data = this.state.dataSourceCoordinates[title];
 			let offset = data.y;
-			console.warn("onSelect, this.state.titles[index] " + title + " " + offset);
 			this.list.scrollTo({ x: 0, y: offset, animated: false });
-      this.touchedTime = new Date().getTime();
+			this.touchedTime = new Date().getTime();
 
-      // Only emit when different index has been selected
-      if (this.oldIndex !== index) {
-        this.oldIndex = index;
-        this.props.onSelect ? this.props.onSelect(index) : null;
-
-        this.setState({
-          selectAlphabet: this.state.titles[index]
-        });
-      }
-    }
-  };
+			// Only emit when different index has been selected
+			if (this.oldIndex !== index) {
+				this.oldIndex = index;
+				this.props.onSelect ? this.props.onSelect(index) : null;
+				this.setState({
+					selectAlphabet: this.state.titles[index]
+				});
+			}
+		}
+	};
 
   /**
    * Change the selected letter when the element in the visible range changes
