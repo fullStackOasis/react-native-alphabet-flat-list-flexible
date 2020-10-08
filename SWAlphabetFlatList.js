@@ -242,6 +242,11 @@ class KeyedView extends React.Component {
 		let h = 25;
 		let item = this.props.item;
 		let sectionId = item; // e.g. "T"
+		// TODO FIXME
+		// Getting an ERROR message "Warning: Each child in a list should have a unique "key" prop."
+		// these do not help:
+		//let viewKey = "swView" + item;
+		//let sectionHeaderKey = "swSectionHeader" + item;
 		// item is NOT {"item":{"name":"Alex Tabarrok","id":20},"index":0,"sectionId":"T","last":false}
 		// item is "T" for example
 		// data is {"A":[{"name":"Edith Abbott","id":1},
@@ -249,8 +254,8 @@ class KeyedView extends React.Component {
 		//          "B":[{"name":"Robert Barro","id":3},...
 		// Useful for debugging:
 		// this.props.data[sectionId].map((itemValue, itemIndex, items) => console.warn(JSON.stringify(itemValue) + ", " + itemIndex + ", item " + item));
-		return (<View key={item} onLayout={this.handleOnLayout}>
-		<SectionHeader key={item} height={h} h={h} title={item} handleSectionHeaderLayout={this.props.handleSectionHeaderLayout}/>
+		return (<View onLayout={this.handleOnLayout}>
+		<SectionHeader height={h} h={h} title={item} handleSectionHeaderLayout={this.props.handleSectionHeaderLayout}/>
 		{this.props.data[sectionId].map((itemValue, itemIndex, items) =>
 			this.props.renderItem({
 				item: itemValue,
