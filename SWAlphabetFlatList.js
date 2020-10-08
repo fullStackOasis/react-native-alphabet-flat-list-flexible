@@ -118,7 +118,7 @@ export class SWAlphabetFlatList extends Component {
    */
   onViewableItemsChanged = ({ viewableItems }) => {
     if (viewableItems && viewableItems.length) {
-      // 点击字母触发的滚动3秒内不响应
+      // The scroll triggered by clicking the letter does not respond within 3 seconds
       if (new Date().getTime() - this.touchedTime < 3000) {
         return;
       }
@@ -142,7 +142,7 @@ export class SWAlphabetFlatList extends Component {
 			data={this.props.data}
 			handleSectionHeaderLayout={this.handleSectionHeaderLayout}
 			renderItem={this.props.renderItem}
-			handleChildLayout={this.handleChildLayout}
+			//handleChildLayout={this.handleChildLayout}
 		/>);
 	};
 
@@ -161,10 +161,8 @@ export class SWAlphabetFlatList extends Component {
 	
 	handleChildLayout = (data) => {
 		// Input data like {"width":411.4285583496094,"height":225.14285278320312,"x":0,"y":225.14285278320312}
-		console.warn("SW Hello handleChildLayout App handles data from child: " + JSON.stringify(data));
 		var obj = {};
 		obj[data.id] = data;
-		console.warn("SW Hello handleChildLayout App handles data from child: " + JSON.stringify(obj));
 		var newKey = "" + data.id;
 		this.setState(prevState => {
 			let z = { ...prevState.dataSourceCoordinates };
