@@ -14,8 +14,6 @@ export function AlphabetListView({ onLayout, container, contentHeight, pageY, ti
     const event = evt.nativeEvent || {};
     const index = Math.floor((event.pageY - pageY) / itemHeight);
 
-    // console.log('AlphabetListView.onTouchChange()', event.pageY, index, type);
-
     if (index >= 0 && titles[index]) {
       if (toast) {
         setTimeout(() => {

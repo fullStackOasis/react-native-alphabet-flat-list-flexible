@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { SectionHeader } from './SectionHeader';
 import { AlphabetListView } from './AlphabetListView';
 import { SectionListItem } from './SectionListItem';
-const screenHeight = Dimensions.get('window').height;
 
 /**
  * See similar code in https://github.com/UseAllFive/react-native-alphabet-flat-list
@@ -114,7 +113,7 @@ export class SWAlphabetFlatList extends Component {
   };
 
   /**
-   * 可视范围内元素变化时改变所选字母
+   * Change the selected letter when the element in the visible range changes
    * @param viewableItems
    */
   onViewableItemsChanged = ({ viewableItems }) => {
@@ -130,62 +129,22 @@ export class SWAlphabetFlatList extends Component {
     }
   };
 
-  getItemLayout = (index) => {
-	  console.warn("Hello, index = " + index + " dataSourceCoordinates = " + JSON.stringify(this.props.dataSourceCoordinates));
-	  let x = "u";
-	  return ({
-    length: this.state.itemLayout[index].length,
-    offset: this.state.itemLayout[index].offset,
-    index
-	})};
-	
 	handleSectionHeaderLayout = (data) => {
-		console.warn("Hello handleSectionHeaderLayout App handles data from child: " + JSON.stringify(data));
-		var obj = {};
+		// TODO anything?
 	}
 
   /**
    * @param{String} item is the header for this section, like "A", "B", etc.
    */
-  renderItem = item => {
-		console.warn("Hello renderItem " + item);
-    //const MSectionHeader = this.props.sectionHeaderComponent;
-	
-	// this.props.renderItem renders a View with the "item" text, the person's name in the Contact list or whatever.
-	// this.props.renderItem is passed an Object that looks like this:
-	// {"item":"Shlomo Eckstein","index":0,"sectionId":"E","last":false}
-	// ..
-	// {"item":"Vanessa Erogbogbo","index":5,"sectionId":"E","last":true}
-	// ..
-	// {"item":"Hello World","index":0,"sectionId":"H","last":true}
-	// So, index starts at 0 for each **section**.
-	var h = 25; 
-	/*
-	if (this.props.sectionHeaderHeight) {
-		h = this.props.sectionHeaderHeight;
-	}*/
-	/*
-    return (
-      <View key={item}>
-        <SectionHeader key={item} height={h} h={h} title={item} handleSectionHeaderLayout={this.handleSectionHeaderLayout}/>
-        {this.props.data[item].map((itemValue, itemIndex, items) =>
-          this.props.renderItem({
-            item: itemValue,
-            index: itemIndex,
-            sectionId: item,
-            last: itemIndex === items.length - 1
-          })
-        )}
-      </View>
-		);
-		*/
+	renderItem = item => {
+		// this.props.data is something like {"A":[{"name":"Edith Abbott","id":1}, ...}
 		return (<KeyedView item={item}
-				data={this.props.data}
-				handleSectionHeaderLayout={this.handleSectionHeaderLayout}
-				renderItem={this.props.renderItem}
-				handleChildLayout={this.handleChildLayout}
-		/>)
-  };
+			data={this.props.data}
+			handleSectionHeaderLayout={this.handleSectionHeaderLayout}
+			renderItem={this.props.renderItem}
+			handleChildLayout={this.handleChildLayout}
+		/>);
+	};
 
 	constructor(props) {
 		super(props);
