@@ -11,15 +11,12 @@ import { SectionListItem } from './SectionListItem';
 export class SWAlphabetFlatList extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    itemHeight: PropTypes.number.isRequired,
     renderItem: PropTypes.func.isRequired, // this.props.renderItem - DO NOT CONFUSE WITH this.renderItem!
-    sectionHeaderHeight: PropTypes.number,
     sectionItemComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     onSelect: PropTypes.func
   };
 
   static defaultProps = {
-    sectionHeaderHeight: 25,
 		sectionItemComponent: SectionListItem,
 		sectionHeaderComponent: SectionHeader
   };
@@ -40,31 +37,9 @@ export class SWAlphabetFlatList extends Component {
   refreshBaseData = data => {
     const titles = Object.keys(data);
 
-    const offset = (index, itemLength) => index * this.props.sectionHeaderHeight + itemLength * this.props.itemHeight;
-
-    const itemLayout = titles.map((title, index) => {
-      const beforeItemLength = titles.slice(0, index).reduce((length, item) => length + data[item].length, 0);
-      const itemLength = data[title].length;
-      return {
-        title,
-        itemLength,
-        beforeItemLength,
-        length: this.props.sectionHeaderHeight + this.props.itemHeight * itemLength,
-        offset: offset(index, beforeItemLength)
-      };
-    });
-
-    // Calculate the number of first screen renderings to avoid blank areas
-    let initialNumToRender = itemLayout.findIndex(item => item.offset >= this.state.containerHeight);
-    if (initialNumToRender < 0) {
-      initialNumToRender = titles.length;
-    }
-
-    this.setState({
-      itemLayout,
+		this.setState({
       titles,
-      selectAlphabet: titles[0],
-      initialNumToRender
+      selectAlphabet: titles[0]
     });
   };
 
@@ -91,7 +66,7 @@ export class SWAlphabetFlatList extends Component {
 	onSelect = index => {
 		if (this.state.titles[index]) {
 			let title = this.state.titles[index]; // e.g. "T"
-			// No longer doing this; it assumed fixed height on each item
+			// No longer using getItemLayout; it assumed fixed height on each item
 			// const { length, offset } = this.getItemLayout(index);
 			// this.list.scrollTo({ x: 0, y: offset, animated: false });
 			let data = this.state.dataSourceCoordinates[title];
@@ -150,7 +125,6 @@ export class SWAlphabetFlatList extends Component {
 		//this.renderEach = this.renderEach.bind(this);
 		this.state = {
 			dataSourceCoordinates : {},
-			itemLayout : [],
 			titles : [],
 			selectAlphabet: undefined,
 			initialNumToRender : 0
