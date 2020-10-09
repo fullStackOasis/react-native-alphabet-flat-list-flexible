@@ -7,7 +7,7 @@ import { View, Text } from 'react-native';
 
 export function SectionListItem({ title, height, active = false }) {
   return (
-    <View
+    <View key={title}
       style={{
         height,
         width: 30,
