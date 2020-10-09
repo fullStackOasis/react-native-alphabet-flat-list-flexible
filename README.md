@@ -1,6 +1,6 @@
 # A Flexible Alphabet Flat List
 
-<img alt="scroll to item" src="https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible/raw/master/images/react-native-alphabet-flat-list-flexible-demo.gif" width="100">
+<img alt="scroll to item" src="https://github.com/fullStackOasis/react-native-alphabet-flat-list-flexible/raw/master/images/react-native-alphabet-flat-list-flexible-demo.gif" width="300">
 
 Click a letter in the vertical alphabet list, and you're taken to that section of the item list.
 
