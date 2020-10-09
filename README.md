@@ -20,6 +20,9 @@ The [demo project that was used to create the gif above is found at github](http
 - **`renderItem`**_(Function)_ [isRequire] - itemComponent render
 - **`sectionHeaderComponent`**_(Component)_ - sectionHeader
 
+## Other Props
+
+Thanks to [yoonzm](https://github.com/yoonzm/react-native-alphabet-flat-list) and [UseAllFive](https://github.com/UseAllFive/react-native-alphabet-flat-list) which were the basis for this project!
 
 ## License
 
