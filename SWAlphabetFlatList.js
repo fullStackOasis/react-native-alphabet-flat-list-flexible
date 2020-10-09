@@ -20,7 +20,8 @@ export class SWAlphabetFlatList extends Component {
 
   static defaultProps = {
     sectionHeaderHeight: 25,
-    sectionItemComponent: SectionListItem
+		sectionItemComponent: SectionListItem,
+		sectionHeaderComponent: SectionHeader
   };
 
   componentDidMount() {
@@ -135,7 +136,8 @@ export class SWAlphabetFlatList extends Component {
    */
 	renderItem = item => {
 		// this.props.data is something like {"A":[{"name":"Edith Abbott","id":1}, ...}
-		return (<KeyedView item={item}
+		return (<KeyedView key={item} item={item}
+			sectionHeader={this.props.sectionHeaderComponent}
 			data={this.props.data}
 			handleSectionHeaderLayout={this.handleSectionHeaderLayout}
 			renderItem={this.props.renderItem}
@@ -242,6 +244,7 @@ class KeyedView extends React.Component {
 		let h = 25;
 		let item = this.props.item;
 		let sectionId = item; // e.g. "T"
+		const MSectionHeader = this.props.sectionHeader;
 		// TODO FIXME
 		// Getting an ERROR message "Warning: Each child in a list should have a unique "key" prop."
 		// these do not help:
@@ -255,7 +258,7 @@ class KeyedView extends React.Component {
 		// Useful for debugging:
 		// this.props.data[sectionId].map((itemValue, itemIndex, items) => console.warn(JSON.stringify(itemValue) + ", " + itemIndex + ", item " + item));
 		return (<View onLayout={this.handleOnLayout}>
-		<SectionHeader height={h} h={h} title={item} handleSectionHeaderLayout={this.props.handleSectionHeaderLayout}/>
+		<MSectionHeader height={h} h={h} title={item} handleSectionHeaderLayout={this.props.handleSectionHeaderLayout}/>
 		{this.props.data[sectionId].map((itemValue, itemIndex, items) =>
 			this.props.renderItem({
 				item: itemValue,
