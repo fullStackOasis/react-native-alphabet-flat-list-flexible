@@ -25,12 +25,6 @@ export class SWAlphabetFlatList extends Component {
     this.refreshBaseData(this.props.data);
   }
 
-  componentWillReceiveProps({ data }) {
-    if (data !== this.props.data) {
-      this.refreshBaseData(data);
-    }
-  }
-
   /**
    * @param data
    */
